@@ -184,6 +184,12 @@ function addNote() {
   presentList(todoList);
 }
 
+function deleteNote(noteToDelete) {
+  todoList.splice(noteToDelete, 1);
+  console.log("Debug");
+  presentList(todoList);
+}
+
 function showRemovedList() {
   var ul = document.getElementById("finishedListUl");
   ul.innerHTML = " ";
@@ -191,15 +197,21 @@ function showRemovedList() {
   var _loop2 = function _loop2(i) {
     if (todoList[i].enabled == false) {
       var newLi = document.createElement("li");
-      var newLiButton = document.createElement("button");
-      newLiButton.innerHTML = "Återställ";
-      newLi.appendChild(newLiButton);
+      var restoreButton = document.createElement("button");
+      restoreButton.innerHTML = "Återställ";
+      newLi.appendChild(restoreButton);
       newLi.innerHTML = todoList[i].note + "\t";
       newLi.id = JSON.stringify(i);
-      newLiButton.addEventListener("click", function () {
+      restoreButton.addEventListener("click", function () {
         returnToList(i);
       });
-      newLi.appendChild(newLiButton);
+      newLi.appendChild(restoreButton);
+      var deleteButton = document.createElement("button");
+      deleteButton.innerHTML = "Radera";
+      deleteButton.addEventListener("click", function () {
+        deleteNote(i);
+      });
+      newLi.appendChild(deleteButton);
       ul.appendChild(newLi);
     }
   };

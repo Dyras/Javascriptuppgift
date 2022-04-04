@@ -53,6 +53,12 @@ function addNote() {
         presentList(todoList);    
 }
 
+function deleteNote(noteToDelete:number) {
+    todoList.splice(noteToDelete, 1);
+    console.log("Debug")
+    presentList(todoList);
+}
+
 function showRemovedList (){
     let ul:HTMLElement = document.getElementById("finishedListUl")!;
 
@@ -60,15 +66,21 @@ function showRemovedList (){
     for (let i:number = 0; i < todoList.length; i++) {
         if (todoList[i].enabled == false){
     let newLi:HTMLLIElement = document.createElement("li");
-    let newLiButton:HTMLButtonElement = document.createElement("button");
-    newLiButton.innerHTML = "Återställ";
-    newLi.appendChild(newLiButton);
+    let restoreButton:HTMLButtonElement = document.createElement("button");
+    restoreButton.innerHTML = "Återställ";
+    newLi.appendChild(restoreButton);
     newLi.innerHTML = todoList[i].note + "\t";
     newLi.id = JSON.stringify(i);
-    newLiButton.addEventListener ("click", function(){
+    restoreButton.addEventListener ("click", function(){
         returnToList(i);
     });
-    newLi.appendChild(newLiButton);
+    newLi.appendChild(restoreButton);
+    let deleteButton:HTMLButtonElement = document.createElement("button");
+    deleteButton.innerHTML = "Radera";
+    deleteButton.addEventListener ("click", function(){
+        deleteNote(i);
+    });
+    newLi.appendChild(deleteButton);
     ul.appendChild(newLi);
 }
   }
