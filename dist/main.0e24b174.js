@@ -137,8 +137,8 @@ var todoList = [new Note("Kom ihåg att köpa mjölk", true), new Note("Glöm in
 
 window.onload = function () {
   presentList(todoList);
-  var addNote2 = document.getElementById("addNote2");
-  addNote2 === null || addNote2 === void 0 ? void 0 : addNote2.addEventListener("click", addNote);
+  var noteToAdd = document.getElementById("noteField");
+  noteToAdd === null || noteToAdd === void 0 ? void 0 : noteToAdd.addEventListener("click", addNote);
 };
 
 function presentList(todoList) {
@@ -149,7 +149,7 @@ function presentList(todoList) {
     if (todoList[i].enabled == true) {
       var newLi = document.createElement("li");
       var newLiButton = document.createElement("button");
-      newLiButton.innerHTML = "Radera";
+      newLiButton.innerHTML = "Markera som klar";
       newLi.appendChild(newLiButton);
       newLi.innerHTML = todoList[i].note + "\t";
       newLi.id = JSON.stringify(i);
@@ -244,7 +244,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "13132" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2338" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

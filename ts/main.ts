@@ -11,8 +11,8 @@ var todoList:Note[] = [new Note("Kom ihåg att köpa mjölk", true), new Note("G
 
 window.onload = function() {
     presentList(todoList);
-    let addNote2 = document.getElementById("addNote2");
-    addNote2?.addEventListener("click", addNote)
+    let noteToAdd = document.getElementById("noteField");
+    noteToAdd?.addEventListener("click", addNote)
 
 }
 
@@ -23,7 +23,7 @@ function presentList (todoList:Note[]){
         if (todoList[i].enabled == true){
     let newLi:HTMLLIElement = document.createElement("li");
     let newLiButton:HTMLButtonElement = document.createElement("button");
-    newLiButton.innerHTML = "Radera";
+    newLiButton.innerHTML = "Markera som klar";
     newLi.appendChild(newLiButton);
     newLi.innerHTML = todoList[i].note + "\t";
     newLi.id = JSON.stringify(i);
