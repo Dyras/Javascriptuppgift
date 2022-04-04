@@ -1,0 +1,83 @@
+class Note{
+    note:string;
+    enabled:boolean;
+constructor(note:string, enabled:boolean){
+this.note = note;
+this.enabled = enabled;
+}
+}
+
+var todoList:Note[] = [new Note("Kom ihåg att köpa mjölk", true), new Note("Glöm inte tandkräm!", true), new Note("Bli klar med tentan innan torsdag nästa vecka!", true)];
+
+window.onload = function() {
+    presentList(todoList);
+    let addNote2 = document.getElementById("addNote2");
+    addNote2?.addEventListener("click", addNote)
+
+}
+
+function presentList (todoList:Note[]){
+    let ul:HTMLElement = document.getElementById("todoListUl")!;
+    ul.innerHTML = " "
+    for (let i:number = 0; i < todoList.length; i++) {
+        if (todoList[i].enabled == true){
+    let newLi:HTMLLIElement = document.createElement("li");
+    let newLiButton:HTMLButtonElement = document.createElement("button");
+    newLiButton.innerHTML = "Radera";
+    newLi.appendChild(newLiButton);
+    newLi.innerHTML = todoList[i].note + "\t";
+    newLi.id = JSON.stringify(i);
+    newLiButton.addEventListener ("click", function(){
+        removeFromList(i);
+    });
+    newLi.appendChild(newLiButton);
+    ul.appendChild(newLi);
+}
+  }
+  showRemovedList();
+}
+
+function removeFromList (noteToRemove:number){
+    todoList[noteToRemove].enabled = false;
+    presentList(todoList);
+}
+
+function returnToList (noteToEnable:number){
+    todoList[noteToEnable].enabled = true;
+    presentList(todoList);
+}
+
+function addNote() {
+        var newNote:string = (<HTMLInputElement>document.getElementById("newNoteInput")).value;
+        todoList.push(new Note(newNote, true));
+        presentList(todoList);    
+}
+
+function showRemovedList (){
+    let ul:HTMLElement = document.getElementById("finishedListUl")!;
+
+    ul.innerHTML = " "
+    for (let i:number = 0; i < todoList.length; i++) {
+        if (todoList[i].enabled == false){
+    let newLi:HTMLLIElement = document.createElement("li");
+    let newLiButton:HTMLButtonElement = document.createElement("button");
+    newLiButton.innerHTML = "Återställ";
+    newLi.appendChild(newLiButton);
+    newLi.innerHTML = todoList[i].note + "\t";
+    newLi.id = JSON.stringify(i);
+    newLiButton.addEventListener ("click", function(){
+        returnToList(i);
+    });
+    newLi.appendChild(newLiButton);
+    ul.appendChild(newLi);
+}
+  }
+}
+
+function switchPlaces (firstNote:number, secondNote:number){
+    var buffer:Note;
+    buffer = todoList[firstNote];
+    todoList[firstNote] = todoList[secondNote];
+    todoList[secondNote] = buffer;
+    presentList(todoList);
+}
