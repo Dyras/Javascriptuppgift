@@ -141,7 +141,8 @@ window.onload = function () {
   noteToAdd === null || noteToAdd === void 0 ? void 0 : noteToAdd.addEventListener("click", addNote);
   var noteSwapping = document.getElementById("noteSwapClick");
   noteSwapping === null || noteSwapping === void 0 ? void 0 : noteSwapping.addEventListener("click", switchPlaces);
-};
+}; // Tömmer min ul och fyller den sen från scratch varje gång denna metod körs
+
 
 function presentList(todoList) {
   var ul = document.getElementById("todoListUl");
@@ -165,34 +166,39 @@ function presentList(todoList) {
 
   for (var i = 0; i < todoList.length; i++) {
     _loop(i);
-  }
+  } // Skriver ut listan av borttagna anteckningar
 
-  showRemovedList();
-}
+
+  showCompletedList();
+} // Tar bort en anteckning från översta listan och flyttar den till understa listan
+
 
 function removeFromList(noteToRemove) {
   todoList[noteToRemove].enabled = false;
   presentList(todoList);
-}
+} // Tar tillbaka en anteckning från den understa listan till den översta
+
 
 function returnToList(noteToEnable) {
   todoList[noteToEnable].enabled = true;
   presentList(todoList);
-}
+} // Lägger till en anteckning
+
 
 function addNote() {
   var newNote = document.getElementById("newNoteInput").value;
   todoList.push(new Note(newNote, true));
   presentList(todoList);
-}
+} // Raderar en anteckning permanent
+
 
 function deleteNote(noteToDelete) {
   todoList.splice(noteToDelete, 1);
-  console.log("Debug");
   presentList(todoList);
-}
+} // Visar listan av avklarade anteckningar
 
-function showRemovedList() {
+
+function showCompletedList() {
   var ul = document.getElementById("finishedListUl");
   ul.innerHTML = " ";
 
@@ -221,14 +227,15 @@ function showRemovedList() {
   for (var i = 0; i < todoList.length; i++) {
     _loop2(i);
   }
-}
+} // Byter plats på två anteckningar i arrayen
+
 
 function switchPlaces() {
   var buffer;
   var newNote = document.getElementById("swapNotePosition1").value;
   var firstNote = parseInt(newNote);
   var newNote = document.getElementById("swapNotePosition2").value;
-  var secondNote = parseInt(newNote);
+  var secondNote = parseInt(newNote); // Kontrollerar så anteckningarna båda inte är avklarade och om de båda inte är det så byts deras platser
 
   if (todoList[firstNote].enabled == true && todoList[secondNote].enabled == true) {
     buffer = todoList[firstNote];

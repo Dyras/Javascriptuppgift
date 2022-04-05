@@ -19,6 +19,7 @@ window.onload = function() {
 
 }
 
+// Tömmer min ul och fyller den sen från scratch varje gång denna metod körs
 function presentList (todoList:Note[]){
     let ul:HTMLElement = document.getElementById("todoListUl")!;
     ul.innerHTML = " "
@@ -37,32 +38,37 @@ function presentList (todoList:Note[]){
     ul.appendChild(newLi);
 }
   }
-  showRemovedList();
+  // Skriver ut listan av borttagna anteckningar
+  showCompletedList();
 }
 
+// Tar bort en anteckning från översta listan och flyttar den till understa listan
 function removeFromList (noteToRemove:number){
     todoList[noteToRemove].enabled = false;
     presentList(todoList);
 }
 
+// Tar tillbaka en anteckning från den understa listan till den översta
 function returnToList (noteToEnable:number){
     todoList[noteToEnable].enabled = true;
     presentList(todoList);
 }
 
+// Lägger till en anteckning
 function addNote() {
         var newNote:string = (<HTMLInputElement>document.getElementById("newNoteInput")).value;
         todoList.push(new Note(newNote, true));
         presentList(todoList);    
 }
 
+// Raderar en anteckning permanent
 function deleteNote(noteToDelete:number) {
     todoList.splice(noteToDelete, 1);
-    console.log("Debug")
     presentList(todoList);
 }
 
-function showRemovedList (){
+// Visar listan av avklarade anteckningar
+function showCompletedList (){
     let ul:HTMLElement = document.getElementById("finishedListUl")!;
 
     ul.innerHTML = " "
@@ -89,6 +95,7 @@ function showRemovedList (){
   }
 }
 
+// Byter plats på två anteckningar i arrayen
 function switchPlaces (){
     var buffer:Note;
     var newNote:string = (<HTMLInputElement>document.getElementById("swapNotePosition1")).value;
@@ -96,7 +103,8 @@ function switchPlaces (){
     var newNote:string = (<HTMLInputElement>document.getElementById("swapNotePosition2")).value;
     var secondNote:number = parseInt(newNote);
     
-    if ( todoList[firstNote].enabled == true && todoList[secondNote].enabled == true){
+    // Kontrollerar så anteckningarna båda inte är avklarade och om de båda inte är det så byts deras platser
+    if (todoList[firstNote].enabled == true && todoList[secondNote].enabled == true){
     buffer = todoList[firstNote];
     todoList[firstNote] = todoList[secondNote];
     todoList[secondNote] = buffer;
