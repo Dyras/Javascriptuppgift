@@ -13,6 +13,9 @@ window.onload = function() {
     presentList(todoList);
     let noteToAdd = document.getElementById("noteField");
     noteToAdd?.addEventListener("click", addNote)
+    
+    let noteSwapping = document.getElementById("noteSwapClick")
+    noteSwapping?.addEventListener("click", switchPlaces)
 
 }
 
@@ -86,10 +89,17 @@ function showRemovedList (){
   }
 }
 
-function switchPlaces (firstNote:number, secondNote:number){
+function switchPlaces (){
     var buffer:Note;
+    var newNote:string = (<HTMLInputElement>document.getElementById("swapNotePosition1")).value;
+    var firstNote:number = parseInt(newNote);
+    var newNote:string = (<HTMLInputElement>document.getElementById("swapNotePosition2")).value;
+    var secondNote:number = parseInt(newNote);
+    
+    if ( todoList[firstNote].enabled == true && todoList[secondNote].enabled == true){
     buffer = todoList[firstNote];
     todoList[firstNote] = todoList[secondNote];
     todoList[secondNote] = buffer;
     presentList(todoList);
+}
 }

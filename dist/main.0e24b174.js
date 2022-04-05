@@ -139,6 +139,8 @@ window.onload = function () {
   presentList(todoList);
   var noteToAdd = document.getElementById("noteField");
   noteToAdd === null || noteToAdd === void 0 ? void 0 : noteToAdd.addEventListener("click", addNote);
+  var noteSwapping = document.getElementById("noteSwapClick");
+  noteSwapping === null || noteSwapping === void 0 ? void 0 : noteSwapping.addEventListener("click", switchPlaces);
 };
 
 function presentList(todoList) {
@@ -221,12 +223,19 @@ function showRemovedList() {
   }
 }
 
-function switchPlaces(firstNote, secondNote) {
+function switchPlaces() {
   var buffer;
-  buffer = todoList[firstNote];
-  todoList[firstNote] = todoList[secondNote];
-  todoList[secondNote] = buffer;
-  presentList(todoList);
+  var newNote = document.getElementById("swapNotePosition1").value;
+  var firstNote = parseInt(newNote);
+  var newNote = document.getElementById("swapNotePosition2").value;
+  var secondNote = parseInt(newNote);
+
+  if (todoList[firstNote].enabled == true && todoList[secondNote].enabled == true) {
+    buffer = todoList[firstNote];
+    todoList[firstNote] = todoList[secondNote];
+    todoList[secondNote] = buffer;
+    presentList(todoList);
+  }
 }
 },{}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -256,7 +265,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "2338" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "5826" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
