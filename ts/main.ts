@@ -103,8 +103,8 @@ function switchPlaces (){
     var newNote:string = (<HTMLInputElement>document.getElementById("swapNotePosition2")).value;
     var secondNote:number = parseInt(newNote);
     
-    // Kontrollerar så anteckningarna båda inte är avklarade och om de båda inte är det så byts deras platser
-    if (todoList[firstNote].enabled == true && todoList[secondNote].enabled == true){
+    // Kontrollerar så anteckningarna antingen båda är avklarade eller båda är oavklarade. Om de är det så byts platsen på dem.
+    if (todoList[firstNote].enabled == true && todoList[secondNote].enabled == true || todoList[firstNote].enabled == false && todoList[secondNote].enabled == false){
     buffer = todoList[firstNote];
     todoList[firstNote] = todoList[secondNote];
     todoList[secondNote] = buffer;

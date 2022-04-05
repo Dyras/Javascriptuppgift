@@ -235,9 +235,9 @@ function switchPlaces() {
   var newNote = document.getElementById("swapNotePosition1").value;
   var firstNote = parseInt(newNote);
   var newNote = document.getElementById("swapNotePosition2").value;
-  var secondNote = parseInt(newNote); // Kontrollerar så anteckningarna båda inte är avklarade och om de båda inte är det så byts deras platser
+  var secondNote = parseInt(newNote); // Kontrollerar så anteckningarna antingen båda är avklarade eller båda är oavklarade. Om de är det så byts platsen på dem.
 
-  if (todoList[firstNote].enabled == true && todoList[secondNote].enabled == true) {
+  if (todoList[firstNote].enabled == true && todoList[secondNote].enabled == true || todoList[firstNote].enabled == false && todoList[secondNote].enabled == false) {
     buffer = todoList[firstNote];
     todoList[firstNote] = todoList[secondNote];
     todoList[secondNote] = buffer;
